@@ -4,7 +4,7 @@ pagination:
   data: posts      # Lấy dữ liệu từ file _data/posts.js
   size: 1          # Mỗi trang là 1 bài viết
   alias: post      # Đặt tên biến là 'post' để dùng bên dưới
-permalink: "/blog/{{ post.slug }}/"
+permalink: "/blog/{{ post.slug | slugify }}/index.html"
 ---
 
 <article>

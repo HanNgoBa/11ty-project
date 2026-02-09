@@ -1,21 +1,27 @@
 module.exports = async function () {
-    try {
-        const response = await fetch('http://headless-project.py-media.com/wp-json/wp/v2/categories');
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch categories: ${response.statusText}`);
+    const query = `{
+        categories {
+            nodes {
+                name
+                slug
+                uri
+            }
         }
+    }`;
+    try {
+        const response = await fetch('http://headless-project.py-media.com/graphql', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query })
+        });
+        const result = await response.json();
+        // Trả về mảng nodes y hệt như mảng categories bên REST
+        const categories = result.data.categories.nodes;
 
-        const categories = await response.json();
-        console.log(`DEBUG: Fetched ${categories.length} categories.`);
+        console.log(`DEBUG: Đã lấy ${categories.length} categories.`);
         return categories;
     } catch (error) {
-        console.error("DEBUG: Error fetching categories:", error);
-
-        // Fallback data for testing if API fails
-        return [
-            { name: 'Fallback Cat 1', slug: 'fallback-1', count: 1 },
-            { name: 'Fallback Cat 2', slug: 'fallback-2', count: 1 }
-        ];
+        console.error("Lỗi rồi:", error);
+        return [{ name: 'Fallback', slug: 'fallback' }];
     }
 };

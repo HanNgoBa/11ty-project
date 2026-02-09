@@ -11,8 +11,33 @@ title: Uncode | Interior Design Blog
         <div class="section-layout">
             <div class="posts-grid-container">
                 <div class="posts-grid">
-                    <!-- Posts will be loaded here via JavaScript -->
-                    <div class="loading">Loading posts...</div>
+                    {% for post in posts %}
+                    <article class="post-card">
+                        <div class="post-image">
+                            {% if post.featuredImage.node %}
+                            <img src="{{ post.featuredImage.node.sourceUrl }}" alt="{{ post.title }}">
+                            {% endif %}
+                            
+                            {% if post.categories.nodes[0] %}
+                            <span class="category-badge">{{ post.categories.nodes[0].name }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="post-content">
+                            <h3><a href="/post/{{ post.slug }}/">{{ post.title | safe }}</a></h3>
+                            
+                            <div class="excerpt">
+                                {{ post.excerpt | safe }}
+                            </div>
+                            
+                            <div class="meta">
+                                <span class="date">{{ post.date | readableDate }}</span>
+                            </div>
+                        </div>
+                    </article>
+                    {% else %}
+                    <div class="no-posts">No posts found.</div>
+                    {% endfor %}
                 </div>
             </div>
             

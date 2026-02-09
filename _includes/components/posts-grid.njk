@@ -5,7 +5,7 @@
                 <div class="posts-grid">
                     {% for post in posts %}
                         {# 1. Khai báo biến để check dữ liệu giống như JS #}
-                        {% set featuredImage = post._embedded['wp:featuredmedia'][0].source_url if post._embedded['wp:featuredmedia'] else "https://via.placeholder.com/600x400" %}
+                        {% set featuredImage = post._embedded['wp:featuredmedia'][0].source_url if post._embedded['wp:featuredmedia'] else "http://headless-project.py-media.com/wp-content/uploads/2026/02/Image1.1.1.png" %}
                         {% set category = post._embedded['wp:term'][0][0].name if post._embedded['wp:term'][0][0] else "" %}
                         {% set author = post._embedded['author'][0].name if post._embedded['author'] else "Unknown" %}
 

@@ -6,23 +6,7 @@ title: Uncode | Interior Design Blog
 {% include "components/hero-slider.njk" %}
 
 <!-- Post Grid Section -->
-<section class="posts-section">
-    <div class="container">
-        <div class="section-layout">
-            <div class="posts-grid-container">
-                <div class="posts-grid">
-                    <!-- Posts will be loaded here via JavaScript -->
-                    <div class="loading">Loading posts...</div>
-                </div>
-            </div>
-            
-            <!-- DEBUG: Categories Data -->
-            <pre style="display:none">{{ categories | dump | safe }}</pre>
-            
-            {% include "components/sidebar.njk" %}
-        </div>
-    </div>
-</section>
+{% include "components/post-grid.njk" %}
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
