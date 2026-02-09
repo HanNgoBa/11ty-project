@@ -20,7 +20,7 @@ eleventyComputed:
                 <h1>{{ post.title.rendered | safe }}</h1>
                 <div class="meta">
                     <span class="author">by <strong>{{ post._embedded.author[0].name }}</strong></span>
-                    <span class="date">{{ post.date | date("MMMM D, YYYY") }}</span> <!-- We might need a filter for this later, or use JS to format -->
+                    <span class="date">{{ post.date | postDate("MMMM D, YYYY") }}</span> <!-- We might need a filter for this later, or use JS to format -->
                 </div>
             </div>
         </div>

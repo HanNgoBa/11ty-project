@@ -2,7 +2,7 @@ const { DateTime } = require("luxon");
 
 module.exports = function (eleventyConfig) {
     // Date filter
-    eleventyConfig.addFilter("date", (dateObj, format = "MMMM d, yyyy") => {
+    eleventyConfig.addFilter("postDate", (dateObj, format = "MMMM d, yyyy") => {
         return DateTime.fromISO(dateObj).toFormat(format);
     });
     eleventyConfig.addPassthroughCopy("css");
