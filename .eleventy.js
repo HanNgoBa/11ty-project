@@ -29,21 +29,4 @@ module.exports = function (eleventyConfig) {
 
 };
 
-const { DateTime } = require("luxon");
 
-module.exports = function(eleventyConfig) {
-  
-  // Đăng ký filter "postDate" để sửa lỗi "filter not found"
-  eleventyConfig.addFilter("postDate", (dateObj) => {
-    // Chuyển đổi ngày từ WordPress sang định dạng đẹp
-    return DateTime.fromISO(dateObj).setLocale("vi").toLocaleString(DateTime.DATE_MED);
-  });
-
-  return {
-    dir: {
-      input: ".",
-      output: "_site"
-    },
-    htmlTemplateEngine: "njk"
-  };
-};
