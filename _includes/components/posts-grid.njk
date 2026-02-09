@@ -3,8 +3,39 @@
         <div class="section-layout">
             <div class="posts-grid-container">
                 <div class="posts-grid">
-                    <!-- Posts will be loaded here via JavaScript -->
-                    <div class="loading">Loading posts...</div>
+                    {% for post in posts %}
+                        {# 1. Khai báo biến để check dữ liệu giống như JS #}
+                        {% set featuredImage = post._embedded['wp:featuredmedia'][0].source_url if post._embedded['wp:featuredmedia'] else "https://via.placeholder.com/600x400" %}
+                        {% set category = post._embedded['wp:term'][0][0].name if post._embedded['wp:term'][0][0] else "" %}
+                        {% set author = post._embedded['author'][0].name if post._embedded['author'] else "Unknown" %}
+
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="{{ featuredImage }}" alt="{{ post.title.rendered | safe }}">
+                                {% if category %}
+                                    <span class="category-badge">{{ category }}</span>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="post-content">
+                                {# Lưu ý: Link href sửa lại cho khớp với cấu trúc 11ty của bạn #}
+                                <h3>
+                                    <a href="/blog/{{ post.slug }}/">{{ post.title.rendered | safe }}</a>
+                                </h3>
+                                
+                                <div class="excerpt">
+                                    {{ post.excerpt.rendered | safe }}
+                                </div>
+                                
+                                <div class="meta">
+                                    <span class="author">by <strong>{{ author }}</strong></span>
+                                    <span class="date">{{ post.date | postDate }}</span>
+                                </div>
+                            </div>
+                        </article>
+                    {% else %}
+                        <p>No posts found.</p>
+                    {% endfor %}
                 </div>
             </div>
             
@@ -12,3 +43,4 @@
         </div>
     </div>
 </section>
+
