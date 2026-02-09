@@ -1,0 +1,90 @@
+---
+layout: layouts/base.njk
+pagination:
+    data: posts
+    size: 1
+    alias: post
+permalink: "post/{{ post.slug }}/"
+eleventyComputed:
+    title: "{{ post.title.rendered | safe }}"
+---
+
+<article class="single-post">
+    <!-- Page Header with Post Title -->
+    <section class="page-header post-header">
+        <div class="container">
+            <div class="post-meta-header">
+                {% if post._embedded['wp:term'][0][0] %}
+                <span class="category-badge">{{ post._embedded['wp:term'][0][0].name }}</span>
+                {% endif %}
+                <h1>{{ post.title.rendered | safe }}</h1>
+                <div class="meta">
+                    <span class="author">by <strong>{{ post._embedded.author[0].name }}</strong></span>
+                    <span class="date">{{ post.date | date("MMMM D, YYYY") }}</span> <!-- We might need a filter for this later, or use JS to format -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post Content -->
+    <section class="post-content-section">
+        <div class="container">
+            <div class="section-layout single-layout">
+                <main class="post-body">
+                    {% if post._embedded['wp:featuredmedia'][0] %}
+                    <div class="featured-image">
+                        <img src="{{ post._embedded['wp:featuredmedia'][0].source_url }}" alt="{{ post.title.rendered }}">
+                    </div>
+                    {% endif %}
+                    
+                    <div class="content">
+                        {{ post.content.rendered | safe }}
+                    </div>
+                </main>
+                
+                {% include "components/sidebar.njk" %}
+            </div>
+        </div>
+    </section>
+</article>
+
+<style>
+/* Add some specific styles for single post */
+.single-post .page-header {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.post-meta-header .category-badge {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 4px 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+.post-meta-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+.single-post .featured-image {
+    margin-bottom: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.single-post .featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.post-body .content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+.post-body .content p {
+    margin-bottom: 20px;
+}
+</style>

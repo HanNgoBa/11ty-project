@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: posts      # Lấy dữ liệu từ file _data/posts.js
+  size: 1          # Mỗi trang là 1 bài viết
+  alias: post      # Đặt tên biến là 'post' để dùng bên dưới
+permalink: "/blog/{{ post.slug }}/"
+---
+
+<article>
+  <h1>{{ post.title.rendered }}</h1>
+  
+  <div class="meta">
+    Ngày đăng: {{ post.date | postDate }} 
+    {# Filter postDate nếu bạn đã cài Luxon như tôi hướng dẫn ở trên #}
+  </div>
+
+  {% if post._embedded['wp:featuredmedia'] %}
+    <img src="{{ post._embedded['wp:featuredmedia'][0].source_url }}" alt="{{ post.title.rendered }}">
+  {% endif %}
+
+  <div class="content">
+    {# Quan trọng: Dùng filter | safe để 11ty render HTML từ WordPress #}
+    {{ post.content.rendered | safe }}
+  </div>
+</article>

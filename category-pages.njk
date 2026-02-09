@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+pagination:
+    data: categories    # Tên file trong thư mục _data
+    size: 1             # Mỗi trang hiển thị 1 category
+    alias: cat          # Tên biến đại diện khi lặp
+permalink: "/category/{{ cat.slug | slugify }}/"
+---
+
+<h1>Chuyên mục: {{ cat.name }}</h1>
+
+<div class="posts-list">
+  {# Ở đây bạn sẽ lọc các bài viết thuộc category này #}
+  <p>Danh sách bài viết của {{ cat.name }} sẽ hiện ở đây...</p>
+</div>

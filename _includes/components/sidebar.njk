@@ -1,0 +1,16 @@
+<aside class="sidebar">
+    <div class="widget">
+        <h3>Popular Topics:</h3>
+        <div class="tags">
+            {% for category in categories %}
+            <a href="/category/{{ category.slug }}/" class="tag">{{ category.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="widget banner-widget">
+        <div class="banner-card" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop');">
+            <h4>Increased Range, Faster Charge.</h4>
+        </div>
+    </div>
+</aside>
