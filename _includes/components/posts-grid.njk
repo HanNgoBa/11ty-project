@@ -20,7 +20,7 @@
                             <div class="post-content">
                                 {# Lưu ý: Link href sửa lại cho khớp với cấu trúc 11ty của bạn #}
                                 <h3>
-                                    <a href="/blog/{{ post.slug }}/">{{ post.title.rendered | safe }}</a>
+                                    <a href="/post/{{ post.slug }}/">{{ post.nodes.title | safe }}</a>
                                 </h3>
                                 
                                 <div class="excerpt">
