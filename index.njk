@@ -6,7 +6,18 @@ title: Uncode | Interior Design Blog
 {% include "components/hero-slider.njk" %}
 
 <!-- Post Grid Section -->
-{% include "components/posts-grid.njk" %}
+{% from "macros/postGrid.njk" import renderGrid %}
+<section class="posts-section">
+    <div class="container">
+        <div class="section-layout">
+            <div class="posts-grid-container">
+                {# Truyền mảng 'posts' (từ posts.js) vào là xong #}
+                {{ renderGrid(posts) }}
+            </div>
+            {% include "components/sidebar.njk" %}
+        </div>
+    </div>
+</section>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {

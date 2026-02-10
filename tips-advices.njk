@@ -5,4 +5,18 @@ description: Expert tips and advice for your interior design projects
 ---
 
 {% include "components/page-header.njk" %}
-{% include "components/posts-grid.njk" %}
+
+
+<!-- Post Grid Section -->
+{% from "macros/postGrid.njk" import renderGrid %}
+<section class="posts-section">
+    <div class="container">
+        <div class="section-layout">
+            <div class="posts-grid-container">
+                {# Truyền mảng 'posts' (từ posts.js) vào là xong #}
+                {{ renderGrid(posts) }}
+            </div>
+            {% include "components/sidebar.njk" %}
+        </div>
+    </div>
+</section>

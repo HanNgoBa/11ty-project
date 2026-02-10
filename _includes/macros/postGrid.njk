@@ -1,0 +1,34 @@
+{% macro renderGrid(postsToDisplay) %}
+    <div class="posts-grid">
+        {% for post in postsToDisplay %}
+            {# Giữ nguyên logic biến của bạn #}
+            {% set featuredImage = post.featuredImage.node.sourceUrl if post.featuredImage.node.sourceUrl else "http://headless-project.py-media.com/wp-content/uploads/2026/02/Image1.1.1.png" %}
+            {% set category = post.categories.nodes[0].name if post.categories.nodes[0] else "" %}
+            {% set author = post.author.node.name if post.author else "Admin" %}
+
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="{{ featuredImage }}" alt="{{ post.title | safe }}">
+                    {% if category %}
+                        <span class="category-badge">{{ category }}</span>
+                    {% endif %}
+                </div>
+                
+                <div class="post-content">
+                    <h3>
+                        <a href="/post/{{ post.slug }}/">{{ post.title | safe }}</a>
+                    </h3>
+                    <div class="excerpt">
+                        {{ post.excerpt | safe }}
+                    </div>
+                    <div class="meta">
+                        <span class="author">by <strong>{{ author }}</strong></span>
+                        <span class="date">{{ post.date | postDate }}</span>
+                    </div>
+                </div>
+            </article>
+        {% else %}
+            <p>No posts found.</p>
+        {% endfor %}
+    </div>
+{% endmacro %}

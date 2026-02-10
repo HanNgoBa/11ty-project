@@ -5,4 +5,32 @@ pagination:
     size: 1             # Mỗi trang hiển thị 1 category
     alias: cat          # Tên biến đại diện khi lặp
 permalink: "/category/{{ cat.slug | slugify }}/"
+title: "Category {{ cat.slug }}"
 ---
+
+
+{# 1. Import Macro #}
+{% from "macros/postGrid.njk" import renderGrid %}
+
+<section class="posts-section"> 
+    <div class="container">
+        <div class="section-layout">
+            <div class="posts-grid-container">
+                
+                {% set categoryPosts = [] %}
+                {% for post in posts %}
+                    {% for postCat in post.categories.nodes %}
+                        {% if postCat.slug == cat.slug %}
+                            {% set categoryPosts = (categoryPosts.push(post), categoryPosts) %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+
+                {{ renderGrid(categoryPosts) }}
+            </div>
+            {% include "components/sidebar.njk" %}
+        </div>
+    </div>
+</section>
+
+

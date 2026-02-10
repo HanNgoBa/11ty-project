@@ -15,7 +15,6 @@ module.exports = async function () {
             body: JSON.stringify({ query })
         });
         const result = await response.json();
-        // Trả về mảng nodes y hệt như mảng categories bên REST
         const categories = result.data.categories.nodes;
 
         console.log(`DEBUG: Đã lấy ${categories.length} categories.`);
