@@ -41,7 +41,7 @@ ul {
 .site-header {
     padding: 20px 0;
     border-bottom: 1px solid transparent;
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     width: 100%;
