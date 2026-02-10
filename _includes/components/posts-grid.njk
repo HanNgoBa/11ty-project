@@ -11,7 +11,7 @@
 
                         <article class="post-card">
                             <div class="post-image">
-                                <img src="{{ featuredImage }}" alt="{{ post.title.rendered | safe }}">
+                                <img src="{{ featuredImage }}" alt="{{ post.title | safe }}">
                                 {% if category %}
                                     <span class="category-badge">{{ category }}</span>
                                 {% endif %}

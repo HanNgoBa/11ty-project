@@ -1,14 +1,41 @@
-module.exports = async function() {
-    try {
-        // Lấy danh sách bài viết (mặc định 10 bài, bạn có thể thêm per_page=100)
-        const url = 'http://headless-project.py-media.com/wp-json/wp/v2/posts?_embed';
-        const response = await fetch(url);
-        const posts = await response.json();
+// module.exports = async function() {
+//     try {
+//         // Lấy danh sách bài viết (mặc định 10 bài, bạn có thể thêm per_page=100)
+//         const url = 'http://headless-project.py-media.com/wp-json/wp/v2/posts?_embed';
+//         const response = await fetch(url);
+//         const posts = await response.json();
         
-        console.log(`DEBUG: Đã fetch ${posts.length} bài viết.`);
-        return posts;
-    } catch (error) {
-        console.error("Lỗi fetch posts:", error);
-        return [];
+//         console.log(`DEBUG: Đã fetch ${posts.length} bài viết.`);
+//         return posts;
+//     } catch (error) {
+//         console.error("Lỗi fetch posts:", error);
+//         return [];
+//     }
+// };
+
+module.exports = async function () {
+    const query = `{
+        query GetPostContent {
+            post(id: "16", idType: DATABASE_ID) {
+                id
+                title   
+                content
+                date
+            }
+        }`; 
+    try {
+        const response = await fetch('http://headless-project.py-media.com/graphql', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query })
+        });
+        const result = await response.json();
+        const postContent = result.data.post;
+
+        console.log(`DEBUG: Đã lấy nội dung bài viết với ID ${postContent.id}.`);
+        return postContent;
+    }catch (error) {
+        console.error("Error fetching post content:", error);
+        return null;
     }
-};
+}

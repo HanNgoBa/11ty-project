@@ -6,39 +6,39 @@ pagination:
     alias: post
 permalink: "post/{{ post.slug }}/"
 eleventyComputed:
-    title: "{{ post.title.rendered | safe }}"
+    title: "{{ post.title | safe }}"
 ---
 
 <article class="single-post">
-    <!-- Page Header with Post Title -->
     <section class="page-header post-header">
         <div class="container">
             <div class="post-meta-header">
-                {% if post._embedded['wp:term'][0][0] %}
-                <span class="category-badge">{{ post._embedded['wp:term'][0][0].name }}</span>
+                {# Thay đổi: post._embedded['wp:term'][0][0] thành post.categories.nodes[0] #}
+                {% if post.categories.nodes[0] %}
+                <span class="category-badge">{{ post.categories.nodes[0].name }}</span>
                 {% endif %}
-                <h1>{{ post.title.rendered | safe }}</h1>
+                
+                <h1>{{ post.title | safe }}</h1>
+                
                 <div class="meta">
-                    <span class="author">by <strong>{{ post._embedded.author[0].name }}</strong></span>
-                    <span class="date">{{ post.date | postDate("MMMM D, YYYY") }}</span> <!-- We might need a filter for this later, or use JS to format -->
-                </div>
+                    <span class="author">by <strong>{{ post.author.node.name }}</strong></span>
+                    <span class="date">{{ post.date | postDate("MMMM D, YYYY") }}</span> </div>
             </div>
         </div>
     </section>
 
-    <!-- Post Content -->
     <section class="post-content-section">
         <div class="container">
             <div class="section-layout single-layout">
                 <main class="post-body">
-                    {% if post._embedded['wp:featuredmedia'][0] %}
+                    {% if post.featuredImage.node %}
                     <div class="featured-image">
-                        <img src="{{ post._embedded['wp:featuredmedia'][0].source_url }}" alt="{{ post.title.rendered }}">
+                        <img src="{{ post.featuredImage.node.sourceUrl }}" alt="{{ post.title }}">
                     </div>
                     {% endif %}
                     
                     <div class="content">
-                        {{ post.content.rendered | safe }}
+                        {{ post.excerpt | safe }}
                     </div>
                 </main>
                 
@@ -49,7 +49,7 @@ eleventyComputed:
 </article>
 
 <style>
-/* Add some specific styles for single post */
+/* Giữ nguyên toàn bộ CSS của bạn */
 .single-post .page-header {
     text-align: center;
     padding-bottom: 40px;
