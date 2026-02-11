@@ -6,7 +6,7 @@ async function imageShortcode(src, alt, sizes = "100vw") {
 
     // Cấu hình việc lưu trữ
     let metadata = await Image(src, {
-        widths: [800], // Ông có thể resize ảnh tại đây để tối ưu
+        // widths: [800], // Ông có thể resize ảnh tại đây để tối ưu
         formats: ["webp", "jpeg"], // Tự động convert sang webp cho nhẹ
         urlPath: "/img/", // Đường dẫn trên web sau khi build
         outputDir: "./_site/img/", // Thư mục vật lý lưu ảnh

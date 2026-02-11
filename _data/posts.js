@@ -12,6 +12,7 @@ module.exports = async function () {
                 }
             }
             excerpt
+            content
             categories {
                 nodes {
                 categoryId

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category {{ cat.name }}{% if cat.pageNumber &gt; 0 %} - Page {{ cat.pageNumber + 1 }}{% endif %}</title>
+    <title>test1</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,50 +37,42 @@
     
     <main>
         
-
-
-
-<section class="posts-section"> 
-    <div class="container">
-        <div class="section-layout">
-            <div class="posts-grid-container">
+<article class="single-post">
+    <section class="page-header post-header">
+        <div class="container">
+            <div class="post-meta-header">
                 
-                <div class="posts-grid">
-    
-        
-        
-        
-        
-
-        <article class="post-card">
-            <div class="post-image">
-                <picture><source type="image/webp" srcset="/img/ntEqmItGDh-270.webp 270w" sizes="100vw"><img src="/img/ntEqmItGDh-270.jpeg" alt="Hello world! 111111" loading="lazy" decoding="async" width="270" height="170"></picture>
                 
-                    <span class="category-badge">category 1</span>
+                <span class="category-badge">Uncategorized</span>
                 
-            </div>
-            
-            <div class="post-content">
-                <h3>
-                    <a href="/post/hello-world/">Hello world! 111111</a>
-                </h3>
-                <div class="excerpt">
-                    <p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
-
-                </div>
+                
+                <h1>test1</h1>
+                
                 <div class="meta">
-                    <span class="author">by <strong>Admin</strong></span>
-                    <span class="date">February 6, 2026</span>
-                </div>
+                    <span class="author">by <strong></strong></span>
+                    <span class="date">February 11/2/2026, YYYY</span> </div>
             </div>
-        </article>
-    
-</div>
+        </div>
+    </section>
 
+    <section class="post-content-section">
+        <div class="container">
+            <div class="section-layout single-layout">
+                <main class="post-body">
+                    
+                    <div class="featured-image">
+                        <picture><source type="image/webp" srcset="/img/AEucKf6hTR-466.webp 466w" sizes="100vw"><img src="/img/AEucKf6hTR-466.jpeg" alt="test1" loading="lazy" decoding="async" width="466" height="370"></picture>
+                    </div>
+                    
+                    
+                    <div class="content">
+                        
+<p>áhjkdbahsjd</p>
 
+                    </div>
+                </main>
                 
-            </div>
-            <aside class="sidebar">
+                <aside class="sidebar">
     <div class="widget">
         <h3>Popular Topics:</h3>
         <div class="tags">
@@ -105,12 +97,51 @@
     </div>
 </aside>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</article>
 
-
-
+<style>
+/* Giữ nguyên toàn bộ CSS của bạn */
+.single-post .page-header {
+    text-align: center;
+    padding-bottom: 40px;
+}
+.post-meta-header .category-badge {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 4px 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+.post-meta-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+.single-post .featured-image {
+    margin-bottom: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.single-post .featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.post-body .content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+.post-body .content p {
+    margin-bottom: 20px;
+}
+</style>
     </main>
 
     <footer class="site-footer">
