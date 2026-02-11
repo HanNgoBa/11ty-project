@@ -7,13 +7,14 @@ description: Browse all categories
 {% include "components/page-header.njk" %}
 
 <!-- Post Grid Section -->
-{% from "macros/postGrid.njk" import renderGrid %}
+<!-- Post Grid Section -->
 <section class="posts-section">
     <div class="container">
         <div class="section-layout">
             <div class="posts-grid-container">
                 {# Truyền mảng 'posts' (từ posts.js) vào là xong #}
-                {{ renderGrid(posts) }}
+                {% set postsToDisplay = posts %}
+                {% include "components/post-grid.njk" %}
             </div>
             {% include "components/sidebar.njk" %}
         </div>
