@@ -1,32 +1,53 @@
 ---
 layout: layouts/base.njk
 pagination:
-    data: categories    # Tên file trong thư mục _data
-    size: 1             # Mỗi trang hiển thị 1 category
-    alias: cat          # Tên biến đại diện khi lặp
-permalink: "/category/{{ cat.slug | slugify }}/"
-title: "Category {{ cat.slug }}"
+    data: collections.pagedPostsByCat
+    size: 1
+    alias: cat
+permalink: "/category/{{ cat.slug | slugify }}/{% if cat.pageNumber > 0 %}page/{{ cat.pageNumber + 1 }}/{% endif %}"
+title: "Category {{ cat.name }}{% if cat.pageNumber > 0 %} - Page {{ cat.pageNumber + 1 }}{% endif %}"
 ---
 
 
-{# 1. Import Macro #}
-{% from "macros/postGrid.njk" import renderGrid %}
+{# 1. Import macro (removed) #}
 
 <section class="posts-section"> 
     <div class="container">
         <div class="section-layout">
             <div class="posts-grid-container">
-                
-                {% set categoryPosts = [] %}
-                {% for post in posts %}
-                    {% for postCat in post.categories.nodes %}
-                        {% if postCat.slug == cat.slug %}
-                            {% set categoryPosts = (categoryPosts.push(post), categoryPosts) %}
+                {% set postsToDisplay = cat.posts %}
+                {% include "components/post-grid.njk" %}
+
+                {% if cat.totalPages > 1 %}
+                <nav class="pagination">
+                    {% if cat.pageNumber > 0 %}
+                        <a href="/category/{{ cat.slug | slugify }}/{% if cat.pageNumber == 1 %}{% else %}page/{{ cat.pageNumber }}/{% endif %}" class="page-item">«</a>
+                    {% endif %}
+
+                    {# Thuật toán hiển thị số trang #}
+                    {% set current = cat.pageNumber + 1 %}
+                    {% set total = cat.totalPages %}
+                    {% set window = 1 %} {# Số lượng trang hiển thị xung quanh trang hiện tại #}
+
+                    {% for i in range(1, total + 1) %}
+                        {% if i == 1 or i == total or (i >= current - window and i <= current + window) %}
+                            {# Render số trang #}
+                            <a href="/category/{{ cat.slug | slugify }}/{% if i == 1 %}{% else %}page/{{ i }}/{% endif %}" 
+                            class="page-item {% if i == current %}active{% endif %}">
+                                {{ i }}
+                            </a>
+                        {% elif i == current - window - 1 or i == current + window + 1 %}
+                            {# Render dấu ba chấm #}
+                            <span class="pagination-ellipsis">...</span>
                         {% endif %}
                     {% endfor %}
-                {% endfor %}
 
-                {{ renderGrid(categoryPosts) }}
+                    {# Nút Next #}
+                    {% if cat.pageNumber < cat.totalPages - 1 %}
+                        <a href="/category/{{ cat.slug | slugify }}/page/{{ cat.pageNumber + 2 }}/" class="page-item">»</a>
+                    {% endif %}
+                </nav>
+                {% endif %}
             </div>
             {% include "components/sidebar.njk" %}
         </div>

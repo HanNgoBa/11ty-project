@@ -33,7 +33,7 @@ eleventyComputed:
                 <main class="post-body">
                     {% if post.featuredImage.node %}
                     <div class="featured-image">
-                        <img src="{{ post.featuredImage.node.sourceUrl }}" alt="{{ post.title }}">
+                        {% image post.featuredImage.node.sourceUrl, post.title %}
                     </div>
                     {% endif %}
                     
